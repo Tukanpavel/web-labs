@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c3faa54-2afd-4223-bd90-dc5e411a606e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/lab-first.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +93,7 @@
       <updated>1581428780859</updated>
       <workItem from="1581428783473" duration="9085000" />
       <workItem from="1581462287810" duration="3443000" />
-      <workItem from="1581465965757" duration="766000" />
+      <workItem from="1581465965757" duration="1017000" />
     </task>
     <servers />
   </component>
