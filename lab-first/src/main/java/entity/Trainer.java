@@ -3,6 +3,7 @@ package entity;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,8 @@ import java.util.stream.Stream;
 @Getter
 public class Trainer implements Serializable {
 
+    //TODO: add constructor according to task
+
     private String fName;
     private String spec;
     private Integer phoneNum;
@@ -25,7 +28,7 @@ public class Trainer implements Serializable {
 
     public final static String FILENAME = "lab-first-web.txt";
 
-    public static void writeFile(@NonNull Trainer trainer) {
+    public static void writeFile(@NotNull Trainer trainer) {
         String[] data = {
                 trainer.getFName(),
                 trainer.getSpec(),
