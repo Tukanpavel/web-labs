@@ -5,9 +5,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Serializable;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -28,31 +26,31 @@ public class Trainer implements Serializable {
 
     public final static String FILENAME = "lab-first-web.txt";
 
+    public Trainer(@NotNull Trainer t){
+        this.fName = t.getFName();
+        this.spec = t.getSpec();
+        this.phoneNum = t.getPhoneNum();
+        this.bDate = t.getBDate();
+    }
+
     public static void writeFile(@NotNull Trainer trainer) {
-        String[] data = {
-                trainer.getFName(),
-                trainer.getSpec(),
-                Long.toString(trainer.getBDate().getTime()),
-                trainer.getPhoneNum().toString()
-        };
-        try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(Paths.get(FILENAME)))) {
-            Stream.of(data).forEach(pw::println);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
+            oos.writeObject(trainer);
+            oos.close();
         } catch (IOException e) {
-            System.out.println("I/O Error: " + e);
+            System.out.println("Caught exception" + e);
         }
     }
 
-    public static void readFile(Trainer b) {
-        try (Stream<String> stream = Files.lines(Paths.get(FILENAME))) {
-            ArrayList<String> dataArr = new ArrayList<>(stream.collect(Collectors.toList()));
-            b.setFName(dataArr.get(0));
-            b.setSpec(dataArr.get(1));
-            Date fileDate = b.getBDate();
-            fileDate.setTime(Long.parseLong(dataArr.get(2)));
-            b.setBDate(fileDate);
-            b.setPhoneNum(Integer.parseInt(dataArr.get(3)));
-        } catch (IOException e) {
-            System.out.println("Got an I/O exception while reading file.." + e);
+    public static Trainer readFile() {
+        Trainer b = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))) {
+            b = new Trainer((Trainer) ois.readObject());
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Got an exception while reading file.." + e);
+        } finally {
+            return b;
         }
     }
 }
